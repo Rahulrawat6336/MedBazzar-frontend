@@ -13,12 +13,17 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Label } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 
 export default function Filter9(props){
 
   var navigate= useNavigate()
+
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
 
   const [categoryList,setCategoryList]=useState([])
@@ -144,7 +149,7 @@ export default function Filter9(props){
         return(
         <Paper
       component="form"
-      sx={{ p: '2px 4px',margin:1, display: 'flex',border:'1px solid #A5AFBF', fontWeight:'bold',borderRadius:50,height:25,alignItems: 'center', width:270,background:'#ffff',opacity:0.5 }}
+      sx={{ p: '2px 4px',margin:1, display: 'flex',border:'1px solid #A5AFBF', fontWeight:'bold',borderRadius:matches?50:20,height:matches?25:15,alignItems: 'center', width:matches?270:120,background:'#ffff',opacity:0.5 }}
     >
     
       <InputBase
@@ -161,12 +166,12 @@ export default function Filter9(props){
     }
 
 
-    return(<div style={{display:'flex',justifyContent:'flex-start',height:'auto',borderRadius:20,flexDirection:'column',width:"60%",border:'5px solid #fff',marginTop:'5%',marginLeft:'5%',background:"#F5F5F5"}}>
+    return(<div style={{display:'flex',justifyContent:'flex-start',height:'auto',borderRadius:20,flexDirection:'column',width:matches?"60%":'100%',border:'5px solid #fff',marginTop:'5%',marginLeft:'5%',background:"#F5F5F5"}}>
        <span style={{color:'#0D0F11',fontSize:18,marginTop:'3%' ,marginLeft:'5%'}}>Filter By</span>
        <Divider style={{marginTop:'5%',marginBottom:'7%'}}/>
        <span style={{fontWeight:'bolder',fontSize:15,marginLeft:'5%'}}>Category</span>
        <span>{searchBarComponent()}</span>
-       <div style={{display:"flex",flexDirection:'column',alignItems:"flex-start",marginLeft:'',width:'100%',fontWeight:'lighter'}}>
+       <div style={{display:"flex",flexDirection:'column',alignItems:"flex-start",marginLeft:'',width:matches?'100%':'93%',fontWeight:'lighter'}}>
             {showAllCategory()}
 
 

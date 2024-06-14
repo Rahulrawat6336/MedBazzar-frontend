@@ -34,7 +34,7 @@ export default function ShowUserDetail(props) {
                 <ArrowForwardIosOutlinedIcon style={{ marginLeft: 'auto' }} />
             </div>
             <Divider />
-            <div onClick={()=>navigate('/address')} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginTop: '4%', marginBottom: '5%' }}>
+            <div onClick={()=>navigate('/address',)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginTop: '4%', marginBottom: '5%' }}>
                 <PlaceOutlinedIcon style={{ color: '#64748B' }} />
                 <span style={{ fontWeight: 'bold' }}>Save Addresses</span>
                 <ArrowForwardIosOutlinedIcon style={{ marginLeft: 'auto' }} />

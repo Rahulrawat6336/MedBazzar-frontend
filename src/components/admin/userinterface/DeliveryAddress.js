@@ -15,8 +15,6 @@ export default function DeliveryAddress(props){
 
     var navigate=useNavigate()
  
-    const [status,setStatus]=useState(false)
-    const [pageRefresh,setPageRefresh]=useState(false)
 
 
     const theme = useTheme();
@@ -41,8 +39,8 @@ export default function DeliveryAddress(props){
                 var result=await postData("users/delete_user_address",{addressid:key})
               if(result.status){
       Swal.fire({toast:true,title:'Deleted !', icon:'success'});
-    //   showAllAddress()
-    setPageRefresh(!pageRefresh)
+    
+    props.setPageRefresh(!props.pageRefresh)
     }
     else{
       Swal.fire({toast:true,title:'Fail to delete RECORD !', icon:'success'});
@@ -67,7 +65,7 @@ export default function DeliveryAddress(props){
     
 
         return userAddress?.map((item)=>{
-        return  <div>
+        return  <div style={{display:'flex'}}>
             <label key={userAddress.id}>
        <input
          type="radio"
@@ -75,12 +73,14 @@ export default function DeliveryAddress(props){
          value={userAddress.id}
         
        />
+       <img src='delete.png' onClick={()=>handleDelete(item?.addressid)}  style={{width:15,height:15,marginLeft:150,cursor:'pointer'}}/>
       
     
     
          
          <div style={{display:'flex',flexDirection:'column',padding:10,margin:10}}>
-            <DeleteForeverOutlinedIcon onClick={()=>handleDelete(item?.addressid)}  style={{marginLeft:'auto',cursor:'pointer'}}/>
+            {/* <DeleteForeverOutlinedIcon onClick={()=>handleDelete(item?.addressid)}  style={{marginLeft:'auto',cursor:'pointer'}}/> */}
+              
         <div>{item?.address}</div>
         <div>{item?.landmark}</div>
         <div>{item?.state},{item?.city} {item?.pincode}</div>
@@ -101,8 +101,19 @@ export default function DeliveryAddress(props){
     return(<div style={{display:'flex',width:'50%',border:'solid 1px #00000021',height:'auto',borderRadius:15,padding:10,fontFamily:'kanit',marginTop:40}}>
 <Grid container spacing ={3}>
 
-    <Grid item xs={12} style={{fontSize:14,fontWeight:'bolder'}}>
+    <Grid item xs={12} style={{ display:'flex',fontSize:16,fontWeight:'bolder',alignItems:'center',justifyContent:'center'}}>
         Dilevery Address
+
+        <div style={{display:'flex',justifyContent:'center',alignItems:'center',marginLeft:'auto'}}>
+       
+
+       <Button onClick={handleAddress} startIcon={<AddIcon/>} size="small" variant="contained" style={{display:'flex',borderRadius:30,padding:matches?<></>:10,marginLeft:matches?<></>:'auto',fontFamily:'kanit',fontSize:'.8vw',fontWeight:'bolder',justifyContent:'center',alignItems:'center',marginBottom:10,width:'9vw',height:'4vh'}}>
+        Add Address
+      
+       </Button>
+      
+
+   </div>
     </Grid>
 
     <Grid item xs={12} >
@@ -117,16 +128,7 @@ export default function DeliveryAddress(props){
      </div>}
     </Grid>
 
-    <Grid item md={6} xs={12} style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-       
-
-        <Button onClick={handleAddress} startIcon={<AddIcon/>} size="small" variant="contained" style={{display:'flex',borderRadius:30,padding:matches?<></>:10,marginLeft:matches?<></>:'auto',fontFamily:'kanit',fontSize:'.8vw',fontWeight:'bolder',justifyContent:'center',alignItems:'center',marginBottom:10,width:'9vw',height:'4vh'}}>
-         Add Address
-       
-        </Button>
-       
-
-    </Grid>
+  
 
 
 

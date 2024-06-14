@@ -76,15 +76,18 @@ export default function FilterPage(props){
 
 
     return(
-        <Grid container spacing={3} style={{height:'100%',width:'auto',fontFamily:'kanit',display:'flex',flexDirection:'row'}}>
-        <Grid item xs={12} style={{display:'block',width:'100%'}}>
-            <Header/>
-            {matches?<MenuBar/> :<div></div>}
+        <Grid container spacing={3} style={{height:'100%',position:'relative',width:'auto',fontFamily:'kanit',display:'flex',flexDirection:'row'}}>
+       <Grid item xs={12} >
+        <div style={{position:'fixed',width:'100%',top:0,zIndex:1}}><Header  /></div>
         </Grid>
-        {matches?  <Grid item xs={4} style={{background:'#fff'}}>
+        <Grid item xs={12} >
+    
+        <div style={{position:'relative',top:'40%',}}>{matches?  <MenuBar/> :<div></div>}</div>
+        </Grid>
+        <Grid item xs={matches?4:6} style={{background:'#fff',position:matches?'':'sticky',marginTop:matches?0:70,top:0}}>
             <Filter/>
-        </Grid>:<div></div>}
-        <Grid item xs={matches?8:12} style={{background:'#fff' }}>
+        </Grid>
+        <Grid item xs={matches?8:6} style={{background:'#fff',position:matches?'':'relative',top:matches?0:50}}>
             <div>
                 <span>{productList.categoryname}{productList.picture}</span>
             <ProductList pageRefresh={pageRefresh} setPageRefresh={setPageRefresh} data={productList}/>
